@@ -72,12 +72,8 @@ void optimizeInsertSort(int arr[], int len) {
     int j, tem;
     for (int i = 1; i < len; i++) {
         tem = arr[i];
-        for (j = i; j > 0; j--) {
-            if (arr[j] < arr[j - 1]) {
-                arr[j] = arr[j - 1];
-            } else {
-                break;
-            }
+        for (j = i; j > 0 && arr[j-1] > tem; j--) {
+            arr[j] = arr[j - 1];
         }
         arr[j] = tem;
     }
@@ -89,7 +85,7 @@ Java_com_example_ndktest_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
 
-    int len = 20;
+    int len = 100;
     int *arr = ArrayUtil::create_random_array(len, 100, 200);
     int *arr2 = ArrayUtil::copy_random_array(arr, len);
     int *arr3 = ArrayUtil::copy_random_array(arr, len);
