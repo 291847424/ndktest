@@ -54,21 +54,56 @@ void selectSort(int arr[], int len) {
 
 }
 
+void insertSort(int arr[], int len) {
+
+    for (int i = 1; i < len; i++) {
+        for (int j = i; j > 0; j--) {
+            if (arr[j] < arr[j - 1]) {
+                swap(arr[j], arr[j - 1]);
+            } else {
+                break;
+            }
+        }
+    }
+
+}
+
+void optimizeInsertSort(int arr[], int len) {
+    int j, tem;
+    for (int i = 1; i < len; i++) {
+        tem = arr[i];
+        for (j = i; j > 0; j--) {
+            if (arr[j] < arr[j - 1]) {
+                arr[j] = arr[j - 1];
+            } else {
+                break;
+            }
+        }
+        arr[j] = tem;
+    }
+}
+
 
 extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_ndktest_MainActivity_stringFromJNI(
         JNIEnv *env,
         jobject /* this */) {
 
-    int len = 200;
+    int len = 20;
     int *arr = ArrayUtil::create_random_array(len, 100, 200);
     int *arr2 = ArrayUtil::copy_random_array(arr, len);
+    int *arr3 = ArrayUtil::copy_random_array(arr, len);
+    int *arr4 = ArrayUtil::copy_random_array(arr, len);
 
     ArrayUtil::sort_array("selectSort", selectSort, arr, len);
     ArrayUtil::sort_array("bubbleSort", bubbleSort, arr2, len);
+    ArrayUtil::sort_array("insertSort", insertSort, arr3, len);
+    ArrayUtil::sort_array("optimizeInsertSort", optimizeInsertSort, arr4, len);
 
     delete[] (arr);
     delete[] (arr2);
+    delete[] (arr3);
+    delete[] (arr4);
 
     std::string hello = "Hello from C++";
     return env->NewStringUTF(hello.c_str());

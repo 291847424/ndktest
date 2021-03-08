@@ -39,7 +39,7 @@ namespace ArrayUtil {
     int *copy_random_array(int *arr, int len) {
         int *copy_arr = new int[len];
         memcpy(copy_arr, arr, sizeof(int) * len);
-        return arr;
+        return copy_arr;
     }
 
     void sort_array(char *sortName, void (*sort)(int *, int), int *arr, int len) {
